@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linha do Tempo Interativa</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #061247 0%, #631905 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        animation: backgroundAnimation 10s ease infinite;
+    }
+
+    .content-wrapper {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        width: 100%;
+    }
+
+    h1, h2 {
+        color: #333;
+        text-align: center;
+    }
+
+    p, ul {
+        color: #333;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    ul li {
+        margin-bottom: 10px;
+    }
+
+    .timeline-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scaleY(1); }
+        50% { transform: scaleY(1.2); }
+    }
+
+        .event {
+        position: relative;
+        margin: 30px 0;
+        padding: 10px 20px;
+        transition: transform 0.3s, background-color 0.3s, color 0.3s;
+        cursor: pointer;
+        text-align: center;
+        border: 2px solid #333;
+        border-radius: 8px;
+        background-color: #29104b;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .event::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -10px;
+        width: 20px;
+        height: 20px;
+        background-color: #333;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        transition: background-color 0.3s, transform 0.3s;
+        z-index: -1;
+    }
+
+    .event::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -2px;
+        width: 2px;
+        height: 50px;
+        background-color: #333;
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+
+    .event:last-child::after {
+        display: none;
+    }
+
+    .event:hover::before {
+        background-color: #ffcc00;
+        transform: translateY(-50%) scale(1.2);
+    }
+
+    .event:hover {
+        transform: translateX(10px);
+        background-color: #ffcc00;
+        color: #333;
+    }
+
+    .event .date {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #ffffff;
+    }
+
+    .event .description {
+        margin: 0;
+        color: #ffffff;
+    }
+
+    .event button {
+        all: unset;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 10px 20px;
+        text-align: center;
+        border: 2px solid #333;
+        border-radius: 8px;
+        background-color: #7228b8;
+        transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .event button:hover {
+        background-color: #ffcc00;
+        color: #333;
+    }
+</style>
+</head>
+<body>
+
+<div class="content-wrapper">
+    <h1>A Jornada Através do Tempo: A História dos Sistemas Operacionais</h1>
+    <p>A história dos sistemas operacionais (SOs) é uma saga épica que se entrelaça com a própria evolução da computação. Desde os primórdios dos mainframes até os smartphones que cabem na palma da mão, os SOs se adaptaram, se reinventaram e se tornaram indispensáveis para gerenciar a complexa sinfonia de hardware e software.</p>
+    
+    <h2>Era dos Mainframes: Gigantes e Pioneiros (Décadas de 1950 e 1960)</h2>
+    <ul>
+        <li><strong>GM-NAA I/O (1956):</strong> O primeiro SO funcional, criado pela General Motors para o IBM 704, automatizou tarefas e otimizou o uso da máquina.</li>
+        <li><strong>Sistemas Operacionais para Mainframes:</strong> IBM, Honeywell, Burroughs e outros dominavam com seus SOs proprietários, cada um com suas características e desafios.</li>
+    </ul>
+    
+    <h2>Era dos Minicomputadores: Compartilhando o Poder (Década de 1970)</h2>
+    <ul>
+        <li><strong>UNIX (1969):</strong> Desenvolvido na Bell Labs, o UNIX destacou-se pela portabilidade, robustez e multitarefa, influenciando gerações de SOs.</li>
+        <li><strong>VMS (1977):</strong> Criado pela Digital Equipment Corporation, o VMS foi pioneiro na virtualização, permitindo múltiplos sistemas operarem em um único hardware.</li>
+    </ul>
+    
+    <h2>Era dos Computadores Pessoais: Uma Revolução Gráfica (Décadas de 1980 e 1990)</h2>
+    <ul>
+        <li><strong>MS-DOS (1981):</strong> Desenvolvido pela Microsoft para o IBM PC, o MS-DOS dominou a era dos PCs com sua interface de linha de comando.</li>
+        <li><strong>Mac OS (1984):</strong> Criado pela Apple, destacou-se pela interface gráfica intuitiva e inovadora, abrindo as portas para um público mais amplo.</li>
+        <li><strong>Windows (1985):</strong> Evoluindo do MS-DOS, o Windows conquistou o mundo com sua interface gráfica amigável e recursos aprimorados.</li>
+        <li><strong>Linux (1991):</strong> Inspirado no UNIX, o Linux tornou-se uma alternativa popular e personalizável, conquistando milhões de usuários.</li>
+    </ul>
+    
+    <h2>Era da Convergência: Multiplataformas e Conectividade (Século XXI)</h2>
+    <ul>
+        <li><strong>Android (2008):</strong> Criado pelo Google, o Android tornou-se o sistema operacional dominante em smartphones e tablets, impulsionando a era da mobilidade.</li>
+        <li><strong>iOS (2007):</strong> Desenvolvido pela Apple, o iOS conquistou um público fiel com sua interface elegante e integração perfeita com os dispositivos da marca.</li>
+        <li><strong>Chrome OS (2011):</strong> Criado pelo Google, o Chrome OS destaca-se pela leveza, velocidade e foco em aplicativos web, ideal para Chromebooks e laptops.</li>
+    </ul>
+    
+    <h2>Ramificações e Diversidade: Um Universo de Possibilidades</h2>
+    <ul>
+        <li><strong>Distribuições Linux:</strong> Ubuntu, Debian, Fedora e outras distribuições oferecem diferentes sabores do Linux, cada uma com suas características e comunidades vibrantes.</li>
+        <li><strong>SOs Embarcados:</strong> Presentes em carros, eletrodomésticos e até brinquedos, os SOs embarcados controlam e otimizam o funcionamento de diversos dispositivos.</li>
+        <li><strong>SOs para Servidores:</strong> Windows Server e Linux Server gerenciam servidores poderosos, garantindo a infraestrutura de empresas e serviços online.</li>
+    </ul>
+    
+    <h2>Conclusão: Uma Jornada em Constante Evolução</h2>
+    <p>A história dos sistemas operacionais é um conto de inovação, adaptabilidade e evolução constante. Dos primórdios dos mainframes até os dispositivos móveis que nos acompanham no dia a dia, os SOs se reinventaram para atender às demandas de um mundo em constante transformação. No futuro, podemos esperar ainda mais integração, inteligência artificial e interfaces imersivas, moldando o futuro da computação e da interação humano-máquina.</p>
+
+    <h2>Fontes:</h2>
+
+    <div class="timeline-container">
+        <div class="timeline"></div>
+        <div class="event">
+            <a href="https://pt.wikipedia.org/wiki/História_dos_sistemas_operacionais" target="_blank">
+                <button>
+                    <div class="date">1956</div>
+                    <div class="description">GM-NAA I/O</div>
+                </button>
+            </a>
+        </div>
+        <div class="event">
+            <a href="https://pt.wikipedia.org/wiki/Unix" target="_blank">
+                <button>
+                    <div class="date">1969</div>
+                    <div class="description">UNIX</div>
+                </button>
+            </a>
+        </div>
+        <div class="event">
+            <a href="https://pt.wikipedia.org/wiki/MS-DOS" target="_blank">
+                <button>
+                    <div class="date">1981</div>
+                    <div class="description">MS-DOS</div>
+                </button>
+            </a>
+        </div>
+        <div class="event">
+            <a href="https://pt.wikipedia.org/wiki/MacOS" target="_blank">
+                <button>
+                    <div class="date">1984</div>
+                    <div class="description">Mac OS</div>
+                </button>
+            </a>
+        </div>
+        <div class="event">
+            <a href="https://pt.wikipedia.org/wiki/Windows" target="_blank">
+                <button>
+                    <div class="date">1985</div>
+                    <div class="description">Windows</div>
+                </button>
+            </a>
+        </div>
+        <div class="event">
+            <a href="https://pt.wikipedia.org/wiki/Linux" target="_blank">
+                <button>
+                    <div class="date">1991</div>
+                    <div class="description">Linux</div>
+                </button>
+            </a>
+        </div>
+        <div class="event">
+            <a href="https://pt.wikipedia.org/wiki/Android" target="_blank">
+                <button>
+                    <div class="date">2008</div>
+                    <div class="description">Android</div>
+                </button>
+            </a>
+        </div>
+        <div class="event">
+            <a href="https://pt.wikipedia.org/wiki/IOS" target="_blank">
+                <button>
+                    <div class="date">2007</div>
+                    <div class="description">iOS</div>
+                </button>
+            </a>
+        </div>
+        <div class="event">
+            <a href="https://pt.wikipedia.org/wiki/Chrome_OS" target="_blank">
+                <button>
+                    <div class="date">2011</div>
+                    <div class="description">Chrome OS</div>
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
